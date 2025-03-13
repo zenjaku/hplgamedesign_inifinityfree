@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Redirect to HTTPS if not already using it
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# If the requested file or folder exists, serve it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Otherwise, route the request to index.php (or your router file)
+RewriteRule ^ index.php [L,QSA]
